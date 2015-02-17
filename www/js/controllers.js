@@ -116,7 +116,7 @@ angular.module('ionicParseApp.controllers', [])
 
     })
 
-.controller('LoginController', function($scope, $state, $rootScope, $ionicLoading) {
+.controller('LoginController', function($scope, $state, $rootScope, $ionicLoading, $ionicViewService) {
     $scope.user = {
         username: null,
         password: null
@@ -139,6 +139,10 @@ angular.module('ionicParseApp.controllers', [])
                 $ionicLoading.hide();
                 $rootScope.user = user;
                 $rootScope.isLoggedIn = true;
+                $ionicViewService.nextViewOptions({
+                    disableAnimate: true,
+                    disableBack: true
+                });
                 $state.go('app.home', {
                     clear: true
                 });
