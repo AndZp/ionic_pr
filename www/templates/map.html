@@ -1,0 +1,17 @@
+<ion-view title="MAP" right-buttons="rightButtons">
+    <ion-content has-header="true" has-tabs="true" padding="true">
+
+        <div ng-app="starter" ng-controller="MapController">
+
+        <ion-content scroll="false">
+            <map on-create="mapCreated(map)"></map>
+        </ion-content>
+
+        <ion-footer-bar class="bar-stable">
+            <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
+        </ion-footer-bar>
+        </div>
+
+
+    </ion-content>
+</ion-view>
