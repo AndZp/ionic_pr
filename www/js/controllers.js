@@ -40,7 +40,7 @@ angular.module('ionicParseApp.controllers', [])
     if (!$rootScope.isLoggedIn) {
         $state.go('welcome');
     }
-       GeoObject = Parse.Object.extend("GeoObject");
+       GeoObject = Parse.Object.extend("User");
 
         $scope.query = function ()
         {
@@ -81,7 +81,7 @@ angular.module('ionicParseApp.controllers', [])
                    var mLocation = new google.maps.Marker({
                        position: new google.maps.LatLng( arrUsers[currUser].get('location')._latitude, arrUsers[currUser].get('location')._longitude),
                        map:  $scope.map,
-                       title: arrUsers[currUser].get('name')
+                       title: arrUsers[currUser].get('username')
                    });
                }
 
