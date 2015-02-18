@@ -8,7 +8,7 @@ angular.module('ionicParseApp.service', [])
 
 })
 .service ('chatService', function toUser() {
-    var userServ = this;
-    userServ.chatTo = "";
+    var chatService = this;
+    chatService.chatTo = "";
 
-})
+});
