@@ -6,4 +6,9 @@ angular.module('ionicParseApp.service', [])
     var geopoints = this;
     geopoints.arrUsers = [];
 
-});
+})
+.service ('chatService', function toUser() {
+    var userServ = this;
+    userServ.chatTo = "";
+
+})

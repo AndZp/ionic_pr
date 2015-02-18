@@ -6,8 +6,8 @@
 
         <div class="list">
 
-            <div class="item item-button-right" ng-repeat="result in results">
-                {{result.get("username")}}
+            <div class="item item-button-right" ng-repeat="result in results" >
+              <div ng-click="openChat(result)">{{result.get("username")}}
                 <div ng-switch ="{{result.get('status')}}">
 
                 <p ng-switch-when=1> free</p>
@@ -16,7 +16,7 @@
 
                 <p ng-switch-default>offline</p>
                 </div>
-
+              </div>
 
                 <input class="button button-positive" type="button" value="Find on map" ng-click="findOnMap(result)"/>
             </div>

@@ -19,7 +19,8 @@
 			<ion-list>
 				<ion-item nav-clear menu-close ui-sref="app.home" ng-hide="!isLoggedIn">Home</ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.map" ng-hide="!isLoggedIn">Map</ion-item>
-				<ion-item nav-clear menu-close ui-sref="app.login" ng-hide="isLoggedIn">Login</ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.prchat" ng-hide="!isLoggedIn">Chat</ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.login" ng-hide="isLoggedIn">Login</ion-item>
 				<ion-item nav-clear menu-close ui-sref="app.register" ng-hide="isLoggedIn">Register</ion-item>
 				<ion-item nav-clear menu-close ng-click="logout()" ng-show="isLoggedIn">Logout</ion-item>
 			</ion-list>

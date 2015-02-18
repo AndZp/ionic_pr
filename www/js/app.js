@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'ionicParseApp.controllers' is found in controllers.js
 angular.module('ionicParseApp',
-        [ 'ionic', 'ionicParseApp.controllers', 'starter.directives', 'ionicParseApp.service', 'ngCordova' ]
+        [ 'ionic', 'ionicParseApp.controllers', 'starter.directives', 'ionicParseApp.service', 'ngCordova', 'ionic.contrib.frostedGlass' ]
     )
     .config(function($stateProvider, $urlRouterProvider) {
 
@@ -51,7 +51,15 @@ angular.module('ionicParseApp',
                     }
                 }
             })
-
+            .state('app.prchat', {
+                url: '/prchat',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/prchat.html',
+                        controller: 'PrchatController'
+                    }
+                }
+            })
             .state('app.login', {
                 url: '/login',
                 views: {
