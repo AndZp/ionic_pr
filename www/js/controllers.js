@@ -291,7 +291,7 @@ angular.module('ionicParseApp.controllers', [])
 
 
 })
-    .controller('PrchatController', ['$scope', '$timeout', '$ionicFrostedDelegate', '$ionicScrollDelegate', '$rootScope', function($scope, $timeout, $ionicFrostedDelegate, $ionicScrollDelegate, $rootScope, chatService) {
+    .controller('PrchatController', ['$scope', '$timeout', '$ionicFrostedDelegate', '$ionicScrollDelegate', '$rootScope','chatService' , function($scope, $timeout, $ionicFrostedDelegate, $ionicScrollDelegate, $rootScope, chatService) {
         $scope.chatTo = chatService.chatTo;
         var messageOptions = [
             { content: '<p>Wow, this is really something huh?</p>' },
