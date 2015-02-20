@@ -60,6 +60,16 @@ angular.module('ionicParseApp',
                     }
                 }
             })
+
+            .state('app.chat', {
+                url: '/chat',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/chat.html',
+                        controller: 'ChatController'
+                    }
+                }
+            })
             .state('app.login', {
                 url: '/login',
                 views: {

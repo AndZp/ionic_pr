@@ -1,0 +1,27 @@
+<ion-view title="General chat}}" right-buttons="rightButtons">
+    <ion-content has-header="true" has-tabs="true" padding="true">
+
+        <ol class="messages">
+            <li ng-repeat="message in messages" ion-bind-html-unsafe="message.content">
+            </li>
+        </ol>
+
+    </ion-content>
+    <br/>
+    <footer class="bar bar-footer bar-frosted">
+        <div class="bar bar-header item-input-inset">
+            <label class="item-input-wrapper">
+
+                <input type="text" placeholder="Send text" ng-model="messageText">
+            </label>
+            <button class="button button-small button-positive" ng-click="add()">
+                Send
+            </button>
+        </div>
+
+
+        <!--
+                <button class="button button-clear button-positive" ng-click="add()">Add Message</button>
+        -->
+    </footer>
+</ion-view>

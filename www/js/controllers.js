@@ -328,6 +328,45 @@ angular.module('ionicParseApp.controllers', [])
         };
 
 
+    }])
+
+    .controller('ChatController', ['$scope', '$timeout', '$ionicFrostedDelegate', '$ionicScrollDelegate', '$rootScope', 'chatService', 'parseService', function ($scope, $timeout, $ionicFrostedDelegate, $ionicScrollDelegate, $rootScope, chatService, parseService) {
+        $scope.chatTo = chatService.chatTo;
+        $scope.messageText = "";
+        var messageOptions = [
+            {content: '<p>Wow, this is really something huh?</p>'}
+
+        ];
+
+        var messageIter = 0;
+        $scope.messages = messageOptions.slice(0, messageOptions.length);
+
+        $scope.add = function () {
+
+            var nextMessage = messageOptions[messageIter++ % messageOptions.length];
+            $scope.messages.push(angular.extend({}, nextMessage));
+
+            // Update the scroll area and tell the frosted glass to redraw itself
+            var messageChatParse = new ChatTab();
+            messageChatParse.set("fromUser", $rootScope.user);
+            messageChatParse.set("toUser", chatService.chatTo);
+            messageChatParse.set("message", $scope.messageText);
+            messageChatParse.set("read", false);
+
+            parseService.sendToParse(messageChatParse);
+
+
+            $scope.messageText = "";
+
+            $ionicScrollDelegate.resize();
+            $ionicFrostedDelegate.update();
+
+            $timeout(function () {
+                $ionicScrollDelegate.scrollBottom(true);
+            }, 1);
+        };
+
+
 
 
     }]);
