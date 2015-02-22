@@ -2012,7 +2012,7 @@
 
     var request = Parse._request({
       route: "config",
-      method: "GET",
+        method: "GET"
     });
 
     return request.then(function(response) {

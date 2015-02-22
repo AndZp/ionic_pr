@@ -303,6 +303,21 @@ angular.module('ionicParseApp.controllers', [])
         $scope.messages = messageOptions.slice(0, messageOptions.length);
 
         $scope.add = function() {
+            Parse.Push.send({
+                channels: ["TestC1"],
+                data: {
+                    alert: ("Test mess + ")
+                }
+            }, {
+                success: function () {
+                    alert("push was send")
+                },
+                error: function (error) {
+                    ("push error" + error)
+                }
+            });
+
+
 
             var nextMessage = messageOptions[messageIter++ % messageOptions.length];
             $scope.messages.push(angular.extend({}, nextMessage));

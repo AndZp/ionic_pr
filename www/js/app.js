@@ -102,8 +102,9 @@ angular.module('ionicParseApp',
 
         $urlRouterProvider.otherwise('/welcome');
     })
-    .run(function ($state, $rootScope, $ionicPlatform) {
+    .run(function ($state, $rootScope, $ionicPlatform, $cordovaPush) {
         Parse.initialize('Bfj14OIaEOk24wtKloARGLo7qJ1OXCDQgWsrkTua', 'jECcTVwgitUjji6rFEnhwBYTDdhNn5rNPfOXbNOw');
+
         var currentUser = Parse.User.current();
         $rootScope.user = null;
         $rootScope.isLoggedIn = false;
@@ -114,7 +115,35 @@ angular.module('ionicParseApp',
             $state.go('app.home');
         }
         $ionicPlatform.ready(function() {
-            $cordovaPlugin.someFunction().then(success, error);
+
+
+            parsePlugin.initialize('Bfj14OIaEOk24wtKloARGLo7qJ1OXCDQgWsrkTua', 'TEpPTwzGz8V6kIBLxNhlRnWOgONobzdn1KPnb6NG', function () {
+
+                parsePlugin.subscribe('TestC1', function () {
+
+                    parsePlugin.getInstallationId(function (id) {
+
+
+                        /* var install_data = {
+                         installation_id: id,
+                         channels: ['TestC1']
+                         }*/
+
+
+                    }, function (e) {
+                        alert('error');
+                    });
+
+                }, function (e) {
+                    alert('error');
+                });
+
+            }, function (e) {
+                alert('error');
+            });
+
+
+
         });
     });
 
