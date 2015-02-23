@@ -3,21 +3,24 @@
  */
 angular.module('ionicParseApp.service', [])
     .service('geoPoints', function Geopoints() {
-    var geopoints = this;
-    geopoints.arrUsers = [];
+        var geopoints = this;
+        geopoints.arrUsers = [];
 
-})
+    })
     .service('chatService', function chatService() {
-    var chatService = this;
-    chatService.chatTo = "";
+
+        var chatService = this;
+        chatService.UserTab = Parse.Object.extend("User");
+        chatService.chatTo = "";
+        chatService.toAllUser = "";
 
     })
 
-    .service('parseService', function parseService() {
+    .service('parseService', function parseService(chatService) {
         var parseService = this;
-        parseService.loginUser;
+        parseService.loginUser = "";
 
-        ChatTab = Parse.Object.extend("chat");
+        parseService.ChatTab = Parse.Object.extend("chat");
         parseService.sendToParse = function (messageChatParse) {
 
             messageChatParse.save(null, {
@@ -35,6 +38,30 @@ angular.module('ionicParseApp.service', [])
             });
 
         };
+
+
+        parseService.getMessFromParse = function () {
+
+
+            var query1 = new Parse.Query(parseService.ChatTab);
+            query1.equalTo("fromUser", parseService.loginUser);
+            var query2 = new Parse.Query(parseService.ChatTab);
+            query2.equalTo("toUser", parseService.loginUser);
+            var query3 = new Parse.Query(parseService.ChatTab);
+            query3.equalTo("toUser", chatService.toAllUser);
+            var query = new Parse.Query.or(query1, query2, query3);
+            query.find({
+                success: function (results) {
+                    console.log("RECEIVED " + results.length + " chat messages");
+                    chatService.arrMessParseChat = results;
+
+                },
+                error: function (error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
+        }
+
 
     })
 ;
