@@ -4,8 +4,8 @@
 // 'ionicParseApp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'ionicParseApp.controllers' is found in controllers.js
-angular.module('ionicParseApp',
-        [ 'ionic', 'ionicParseApp.controllers', 'starter.directives', 'ionicParseApp.service', 'ngCordova', 'ionic.contrib.frostedGlass' ]
+var appModule = angular.module('ionicParseApp',
+    ['ionic', 'ionicParseApp.controllers', 'starter.directives', 'ionicParseApp.service', 'ngCordova', 'ionic.contrib.frostedGlass', 'monospaced.elastic', 'angularMoment']
     )
     .config(function($stateProvider, $urlRouterProvider) {
 
@@ -66,7 +66,7 @@ angular.module('ionicParseApp',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/chat.html',
-                        controller: 'ChatController'
+                        controller: 'chatController'
                     }
                 }
             })

@@ -16,10 +16,10 @@ angular.module('ionicParseApp.service', [])
 
     })
 
-    .service('parseService', function parseService(chatService) {
+    .service('parseService', function parseService(chatService, $rootScope, $q) {
         var parseService = this;
         parseService.loginUser = "";
-
+        parseService.ChatMessages = Parse.Object.extend("ChatMessages");
         parseService.ChatTab = Parse.Object.extend("chat");
         parseService.sendToParse = function (messageChatParse) {
 
@@ -40,13 +40,20 @@ angular.module('ionicParseApp.service', [])
         };
 
 
-        parseService.getMessFromParse = function () {
+        parseService.getUserMessages = function (d) {
+            /*
+             var deferred = $q.defer();
 
+             setTimeout(function() {
+             deferred.resolve(parseService.getMessFromParse());
+             }, 1500);
 
+             return deferred.promise;*/
+            var deferred = $q.defer();
             var query1 = new Parse.Query(parseService.ChatTab);
-            query1.equalTo("fromUser", parseService.loginUser);
+            query1.equalTo("fromUser", $rootScope.user);
             var query2 = new Parse.Query(parseService.ChatTab);
-            query2.equalTo("toUser", parseService.loginUser);
+            query2.equalTo("toUser", $rootScope.user);
             var query3 = new Parse.Query(parseService.ChatTab);
             query3.equalTo("toUser", chatService.toAllUser);
             var query = new Parse.Query.or(query1, query2, query3);
@@ -54,6 +61,66 @@ angular.module('ionicParseApp.service', [])
                 success: function (results) {
                     console.log("RECEIVED " + results.length + " chat messages");
                     chatService.arrMessParseChat = results;
+                    deferred.resolve(results);
+
+                },
+                error: function (error) {
+                    alert("Error: " + error.code + " " + error.message);
+                    deferred.reject();
+                }
+            });
+            return deferred.promise;
+        };
+
+        parseService.getUserMessages222 = function (d) {
+            /*
+             var deferred = $q.defer();
+
+             setTimeout(function() {
+             deferred.resolve(parseService.getMessFromParse());
+             }, 1500);
+
+             return deferred.promise;*/
+            var deferred = $q.defer();
+            var query1 = new Parse.Query(parseService.ChatMessages);
+            query1.equalTo("userId", $rootScope.user.id);
+            var query2 = new Parse.Query(parseService.ChatMessages);
+            query2.equalTo("toId", $rootScope.user.id);
+            var query3 = new Parse.Query(parseService.ChatMessages);
+            query3.equalTo("toId", chatService.toAllUser.id);
+            var query = new Parse.Query.or(query1, query2, query3);
+            query.find({
+                success: function (results) {
+                    console.log("RECEIVED " + results.length + " chat messages");
+                    chatService.arrMessParseChat = results;
+                    deferred.resolve(results);
+
+                },
+                error: function (error) {
+                    alert("Error: " + error.code + " " + error.message);
+                    deferred.reject();
+                }
+            });
+            return deferred.promise;
+        };
+
+
+
+        parseService.getMessFromParse = function () {
+
+
+            var query1 = new Parse.Query(parseService.ChatTab);
+            query1.equalTo("fromUser", $rootScope.user);
+            var query2 = new Parse.Query(parseService.ChatTab);
+            query2.equalTo("toUser", $rootScope.user);
+            var query3 = new Parse.Query(parseService.ChatTab);
+            query3.equalTo("toUser", chatService.toAllUser);
+            var query = new Parse.Query.or(query1, query2, query3);
+            query.find({
+                success: function (results) {
+                    console.log("RECEIVED " + results.length + " chat messages");
+                    chatService.arrMessParseChat = results;
+                    return results;
 
                 },
                 error: function (error) {

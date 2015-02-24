@@ -324,11 +324,11 @@ angular.module('ionicParseApp.controllers', [])
 
         var messageIter = 0;
 
-        $scope.messages = [];
+        //$scope.messages = [];
         for (var tempM in chatService.arrMessParseChat) {
             $scope.messages.push({content: '<p>' + chatService.arrMessParseChat[tempM].get('message') + '</p>'});
         }
-        $scope.messages = $scope.messages.slice(0, $scope.messages.length);
+        //$scope.messages = $scope.messages.slice(0, $scope.messages.length);
         $scope.add = function () {
             Parse.Push.send({
                 channels: ["TestC1"],
@@ -369,7 +369,8 @@ angular.module('ionicParseApp.controllers', [])
         };
 
 
-    }])
+    }]);
+/*
 
     .controller('ChatController', ['$scope', '$timeout', '$ionicFrostedDelegate', '$ionicScrollDelegate', '$rootScope', 'chatService', 'parseService', function ($scope, $timeout, $ionicFrostedDelegate, $ionicScrollDelegate, $rootScope, chatService, parseService) {
         $scope.chatTo = chatService.chatTo;
@@ -410,3 +411,4 @@ angular.module('ionicParseApp.controllers', [])
 
     }]);
 
+ */
