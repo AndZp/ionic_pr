@@ -161,12 +161,8 @@ angular.module('ionicParseApp.controllers', [])
                     query.find({
                         success: function (results) {
 
-                            chatService.toAllUser = results[0];
-                            /*  $scope.$digest();
-                             // Do something with the returned Parse.Object values
-                             for (var i = 0; i < results.length; i++) {
-                             var object = results[i];
-                             }*/
+                            $rootScope.toAllUser = results[0];
+
                         },
                         error: function (error) {
                             alert("Error: " + error.code + " " + error.message);

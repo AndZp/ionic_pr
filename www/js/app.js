@@ -105,6 +105,23 @@ var appModule = angular.module('ionicParseApp',
     .run(function ($state, $rootScope, $ionicPlatform, $cordovaPush) {
         Parse.initialize('Bfj14OIaEOk24wtKloARGLo7qJ1OXCDQgWsrkTua', 'jECcTVwgitUjji6rFEnhwBYTDdhNn5rNPfOXbNOw');
 
+        var query = new Parse.Query(Parse.Object.extend("User"));
+
+        query.equalTo("username", "all@admin.com");
+
+        query.find({
+            success: function (results) {
+
+                $rootScope.toAllUser = results[0];
+
+            },
+            error: function (error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
+        });
+
+
+
         var currentUser = Parse.User.current();
         $rootScope.user = null;
         $rootScope.isLoggedIn = false;

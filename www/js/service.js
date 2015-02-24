@@ -55,7 +55,7 @@ angular.module('ionicParseApp.service', [])
             var query2 = new Parse.Query(parseService.ChatTab);
             query2.equalTo("toUser", $rootScope.user);
             var query3 = new Parse.Query(parseService.ChatTab);
-            query3.equalTo("toUser", chatService.toAllUser);
+            query3.equalTo("toUser", $rootScope.toAllUser);
             var query = new Parse.Query.or(query1, query2, query3);
             query.find({
                 success: function (results) {
@@ -87,7 +87,7 @@ angular.module('ionicParseApp.service', [])
             var query2 = new Parse.Query(parseService.ChatMessages);
             query2.equalTo("toId", $rootScope.user.id);
             var query3 = new Parse.Query(parseService.ChatMessages);
-            query3.equalTo("toId", chatService.toAllUser.id);
+            query3.equalTo("toId", $rootScope.toAllUser.id);
             var query = new Parse.Query.or(query1, query2, query3);
             query.find({
                 success: function (results) {
@@ -114,7 +114,7 @@ angular.module('ionicParseApp.service', [])
             var query2 = new Parse.Query(parseService.ChatTab);
             query2.equalTo("toUser", $rootScope.user);
             var query3 = new Parse.Query(parseService.ChatTab);
-            query3.equalTo("toUser", chatService.toAllUser);
+            query3.equalTo("toUser", $rootScope.toAllUser);
             var query = new Parse.Query.or(query1, query2, query3);
             query.find({
                 success: function (results) {

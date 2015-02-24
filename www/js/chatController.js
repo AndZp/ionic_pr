@@ -12,9 +12,9 @@ appModule.controller('chatController', ['$scope', '$rootScope', '$state',
               $ionicPopup, $ionicScrollDelegate, $timeout, $interval, chatService, parseService) {
 
         $scope.toUser = {
-            _id: chatService.toAllUser.id,
-            pic: chatService.toAllUser.get("pic"),
-            username: chatService.toAllUser.get('username')
+            _id: $rootScope.toAllUser.id,
+            pic: $rootScope.toAllUser.get("pic"),
+            username: $rootScope.toAllUser.get('username')
         }
 
         // this could be on $rootScope rather than in $stateParams
