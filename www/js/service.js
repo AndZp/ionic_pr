@@ -14,6 +14,22 @@ angular.module('ionicParseApp.service', [])
         chatService.chatTo = "";
         chatService.toAllUser = "";
 
+        chatService.sendPush = function (message) {
+            Parse.Push.send({
+                channels: ["TestC1"],
+                data: {
+                    alert: ('New message from ' + message.get('username'))
+                }
+            }, {
+                success: function () {
+                    alert("push was send")
+                },
+                error: function (error) {
+                    ("push error" + error)
+                }
+            });
+        }
+
     })
 
     .service('parseService', function parseService(chatService, $rootScope, $q) {

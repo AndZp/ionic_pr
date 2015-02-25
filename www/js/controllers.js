@@ -63,7 +63,9 @@ angular.module('ionicParseApp.controllers', [])
                     alert("Error: " + error.code + " " + error.message);
                 }
             });
+
         }
+        $scope.query();
         $scope.findOnMap = function (fUser) {
             geoPoints.arrUsers.push(fUser);
             $state.go('app.map');

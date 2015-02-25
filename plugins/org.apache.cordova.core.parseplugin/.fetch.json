@@ -1,0 +1,7 @@
+{
+  "source": {
+    "type": "git",
+    "url": "https://github.com/benjie/phonegap-parse-plugin",
+    "subdir": "."
+  }
+}

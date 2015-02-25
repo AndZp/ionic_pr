@@ -47,8 +47,9 @@ appModule.controller('chatController', ['$scope', '$rootScope', '$state',
             }, 0);
 
             messageCheckTimer = $interval(function () {
-                // here you could check for new messages if your app doesn't use push notifications or user disabled them
-            }, 20000);
+                getMessages();
+                console.log("update message")
+            }, 10000);
         });
 
         $scope.$on('$ionicView.leave', function () {
@@ -119,6 +120,7 @@ appModule.controller('chatController', ['$scope', '$rootScope', '$state',
             message.set('picMess', $scope.user.pic);
 
             parseService.sendToParse(message);
+            chatService.sendPush(message);
             $scope.messages.push(message);
 
             $timeout(function () {
@@ -156,7 +158,7 @@ appModule.controller('chatController', ['$scope', '$rootScope', '$state',
                 buttonClicked: function (index) {
                     switch (index) {
                         case 0: // Copy Text
-                            //cordova.plugins.clipboard.copy(message.text);
+                            cordova.plugins.clipboard.copy(message.text);
 
                             break;
                         case 1: // Delete
@@ -176,12 +178,46 @@ appModule.controller('chatController', ['$scope', '$rootScope', '$state',
 
         // this prob seems weird here but I have reasons for this in my app, secret!
         $scope.viewProfile = function (msg) {
-            if (msg.userId === $scope.user._id) {
-                // go to your profile
+            if (msg.get('userId') === $scope.user._id) {
+                $state.go('app.home');
             } else {
-                // go to other users profile
+                $scope.show(msg)
             }
         };
+
+        $scope.show = function (msg) {
+
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    {text: 'Start private chat'},
+                    {text: 'Find on map'}
+                ],
+                destructiveText: 'Delete',
+                titleText: '<b>' + msg.get("username") + '</b>',
+                cancelText: 'Cancel',
+                cancel: function () {
+                    // add cancel code..
+                },
+                buttonClicked: function (index) {
+                    if (index == 0) {
+                        $state.go('app.chat');
+                    }
+                    if (index == 1) {
+                        $state.go('app.map');
+                    }
+                    return true;
+                }
+            });
+
+            // For example's sake, hide the sheet after two seconds
+            $timeout(function () {
+                hideSheet();
+            }, 5000);
+
+        };
+
+
 
         // I emit this event from the monospaced.elastic directive, read line 480
         $scope.$on('taResize', function (e, ta) {

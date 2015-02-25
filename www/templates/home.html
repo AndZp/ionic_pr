@@ -7,17 +7,21 @@
 
         <div class="list">
 
-            <div class="item item-button-right" ng-repeat="result in results" >
-              <div ng-click="openChat(result)">{{result.get("username")}}
-                <div ng-switch ="{{result.get('status')}}">
+            <div class="item item-button-right" ng-repeat="result in results">
 
-                <p ng-switch-when=1> free</p>
+                <div ng-click="openChat(result)">
+                    <img class="profile-pic left" ng-src="{{result.get('pic')}}" onerror="onProfilePicError(this)"/>
 
-                <p ng-switch-when=2> busy</p>
+                    <div>{{result.get("username")}}</div>
+                    <div ng-switch="{{result.get('status')}}">
 
-                <p ng-switch-default>offline</p>
+                        <p ng-switch-when=1> free</p>
+
+                        <p ng-switch-when=2> busy</p>
+
+                        <p ng-switch-default>offline</p>
+                    </div>
                 </div>
-              </div>
 
                 <input class="button button-positive" type="button" value="Find on map" ng-click="findOnMap(result)"/>
             </div>
